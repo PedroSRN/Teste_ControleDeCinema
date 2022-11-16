@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Teste_ControleCinema.Infra.Logging\Teste_ControleCinema.Infra.Logging.csproj" />
+    <ProjectReference Include="..\Teste_ControleDeCinema.Aplicacao\Teste_ControleDeCinema.Aplicacao.csproj" />
+    <ProjectReference Include="..\Teste_ControleDeCinema.Dominio\Teste_ControleDeCinema.Dominio.csproj" />
+    <ProjectReference Include="..\Teste_ControleDeCinema.Orm\Teste_ControleDeCinema.Orm.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,11 @@
+{
+  "VersaoSistema": "1.0",
+
+  "ConfiguracaoLogs": {
+    "DiretorioSaida": "C:\\logs\\ControleCinema"
+  },
+
+  "ConnectionStrings": {
+    "SqlServer": "Data Source=(Localdb)\\mssqllocaldb;Initial Catalog=ControleCinemaOrm;Integrated Security=True"
+  }
+}
