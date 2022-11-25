@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Teste_ControleDeCinema.Orm.Compartilhado;
 
 namespace Teste_ControleDeCinema.Orm.Migrations
 {
     [DbContext(typeof(ControleCinemaDbContext))]
-    partial class ControleCinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221125181535_Configuração_imagem2")]
+    partial class Configuração_imagem2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -14,7 +14,7 @@ namespace Teste_ControleDeCinema.Webapi.ViewModels.ModuloFilme
 
         public string Descricao { get; set; }
 
-        public byte[] Imagem { get; set; }
+        public string UrlImagem { get; set; }
 
         public List<ListarSessaoViewModel> Sessoes { get; set; }
     }

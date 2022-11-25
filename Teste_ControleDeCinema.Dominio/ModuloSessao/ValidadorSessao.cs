@@ -17,19 +17,18 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSessao
             RuleFor(x => x.HoraInicio)
                 .NotEmpty();
 
-            //RuleFor(x => x.HoraTermino)
-            //  .NotEmpty();
-
-            RuleFor(x => x.TipoSessao)
-                .NotEmpty();
-
-            RuleFor(x => x.TipoAudio)
-                .NotNull()
-                .NotEmpty();
-
             RuleFor(x => x.ValorIngresso)
                 .GreaterThan(1)
                 .NotEmpty();
+
+            RuleFor(x => x.FilmeId)
+                .NotNull()
+                .NotEmpty();
+               
+            RuleFor(x => x.SalaId)
+                .NotNull()
+                .NotEmpty();
+
 
            
         }

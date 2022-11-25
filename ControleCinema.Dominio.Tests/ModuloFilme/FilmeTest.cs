@@ -18,7 +18,8 @@ namespace ControleCinema.Dominio.Tests.ModuloFilme
                 Titulo = "Rumo ao Hexa",
                 Duracao = new TimeSpan(0, 01, 40, 00),
                 Descricao = "Fala da busca do brasil para a conquista do tão sonhado hexa",
-                Imagem = new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, },
+                UrlImagem = "teste",
+              
             };
             validador = new ValidadorFilme();
         }
@@ -89,16 +90,18 @@ namespace ControleCinema.Dominio.Tests.ModuloFilme
         }
 
         [TestMethod]
-        public void A_Imagem_Do_Filme_Deve_Ser_Preenchida()
+        public void O_Titulo_da_Imagem_Do_Filme_Não_Pode_Ser_Nulo()
         {
             //arrenge
-            filme.Imagem = default;
+            filme.UrlImagem = null;
 
             //action
             var outroResultado = validador.TestValidate(filme);
 
             //assert
-            outroResultado.ShouldHaveValidationErrorFor(filme => filme.Imagem);
+            outroResultado.ShouldHaveValidationErrorFor(filme => filme.UrlImagem);
         }
+
+       
     }
 }

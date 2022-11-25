@@ -15,11 +15,11 @@ namespace Teste_ControleDeCinema.Webapi.ViewModels.ModuloSessao
 
         public TimeSpan HoraTermino { get; set; }
 
-        public TipoSessaoEnum TipoSessao { get; set; }
+        public string TipoSessao { get; set; }
 
-        public TipoAudioEnum TipoAudio { get; set; }
+        public string TipoAudio { get; set; }
 
-        public string ValorIngresso { get; set; }
+        public decimal ValorIngresso { get; set; }
 
         public ListarFilmeViewModel Filme { get; set; }
 

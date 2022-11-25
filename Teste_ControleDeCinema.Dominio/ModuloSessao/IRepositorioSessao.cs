@@ -9,5 +9,6 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSessao
 {
     public interface IRepositorioSessao : IRepositorio<Sessao>
     {
+      
     }
 }

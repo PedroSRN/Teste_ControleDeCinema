@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using FluentValidation.Results;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Teste_ControleDeCinema.Aplicacao.Compartilhado;
 using Teste_ControleDeCinema.Dominio.Compartilhado;
+using Teste_ControleDeCinema.Dominio.ModuloFilme;
+using Teste_ControleDeCinema.Dominio.ModuloSala;
 using Teste_ControleDeCinema.Dominio.ModuloSessao;
 
 namespace Teste_ControleDeCinema.Aplicacao.ModuloSessao
@@ -14,13 +17,16 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloSessao
     public class ServicoSessao : ServicoBase<Sessao, ValidadorSessao>
     {
         private IRepositorioSessao repositorioSessao;
+        private IRepositorioSala repositorioSala;
         private IContextoPersistencia contextoPersistencia;
+  
 
 
-        public ServicoSessao(IRepositorioSessao repositorioSessao,
+        public ServicoSessao(IRepositorioSessao repositorioSessao, IRepositorioSala repositorioSala,
                                 IContextoPersistencia contexto)
         {
             this.repositorioSessao = repositorioSessao;
+            this.repositorioSala = repositorioSala;
             this.contextoPersistencia = contexto;
         }
 
@@ -35,6 +41,7 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloSessao
 
             try
             {
+
                 repositorioSessao.Inserir(sessao);
 
                 contextoPersistencia.GravarDados();
@@ -100,6 +107,12 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloSessao
         {
             Log.Logger.Debug("Tentando excluir sessao... {@s}", sessao);
 
+
+            if (sessao.NaoPodeExcluir())
+            {
+                return Result.Fail("Uma sessão só pode ser removida se faltar 10 dias ou mais para que ela ocorra.");
+            }
+
             try
             {
                 repositorioSessao.Excluir(sessao);
@@ -122,13 +135,15 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloSessao
             }
         }
 
-        public Result<List<Sessao>> SelecionarTodos(Guid usuarioId = new Guid())
+       
+
+        public Result<List<Sessao>> SelecionarTodos()
         {
             Log.Logger.Debug("Tentando selecionar sessoes...");
 
             try
             {
-                var sessoes = repositorioSessao.SelecionarTodos(usuarioId);
+                var sessoes = repositorioSessao.SelecionarTodos();
 
                 Log.Logger.Information("Sessoes selecionados com sucesso");
 
@@ -171,6 +186,34 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloSessao
 
                 return Result.Fail(msgErro);
             }
+        }
+
+        protected override Result Validar(Sessao arg)
+        {
+            var validador = new ValidadorSessao();
+
+            var resultadoValidacao = validador.Validate(arg);
+
+            List<Error> erros = new List<Error>();
+
+            foreach (ValidationFailure item in resultadoValidacao.Errors)
+                erros.Add(new Error(item.ErrorMessage));
+
+            if (SalaIndisponivel(arg))
+                erros.Add(new Error("Sala indisponivel"));
+
+            if (erros.Any())
+                return Result.Fail(erros);
+
+            return Result.Ok();
+        }
+
+        private bool SalaIndisponivel(Sessao arg)
+        {
+            var salasEncontradas = repositorioSala.SelecionarSalasDisponiveis(arg);
+
+            
+            return  salasEncontradas == null || salasEncontradas.Count < 1;
         }
 
     }

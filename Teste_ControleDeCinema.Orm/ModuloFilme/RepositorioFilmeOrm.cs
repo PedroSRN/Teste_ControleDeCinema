@@ -17,6 +17,11 @@ namespace Teste_ControleDeCinema.Orm.ModuloFilme
         {
         }
 
+        public Filme SelecionarFilmePorNome(string titulo)
+        {
+            return registros.SingleOrDefault(x => x.Titulo == titulo); 
+        }
+
         public override Filme SelecionarPorId(Guid id)
         {
             return registros
@@ -24,6 +29,7 @@ namespace Teste_ControleDeCinema.Orm.ModuloFilme
                 .SingleOrDefault(x => x.Id == id);
         }
 
+        
         
     }
 }

@@ -31,7 +31,7 @@ namespace Teste_ControleDeCinema.Dominio.Compartilhado
                 }
             }
 
-            return null; // could also return string.Empty
+            return null; 
         }
     }
 }

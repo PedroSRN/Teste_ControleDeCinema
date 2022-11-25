@@ -10,7 +10,7 @@ using Teste_ControleDeCinema.Webapi.ViewModels.ModuloSala;
 
 namespace Teste_ControleDeCinema.Webapi.Controllers
 {
-    [Route("api/sala")]
+    [Route("api/salas")]
     [ApiController]
     [Authorize]
     public class SalaController : ControleCinemaControllerBase
@@ -27,7 +27,7 @@ namespace Teste_ControleDeCinema.Webapi.Controllers
         [HttpGet]
         public ActionResult<List<ListarSalaViewModel>> SelecionarTodos()
         {
-            var salaResult = servicoSala.SelecionarTodos(UsuarioLogado.Id);
+            var salaResult = servicoSala.SelecionarTodos();
 
             if (salaResult.IsFailed)
                 return InternalError(salaResult);
@@ -38,6 +38,22 @@ namespace Teste_ControleDeCinema.Webapi.Controllers
                 dados = mapeadorSalas.Map<List<ListarSalaViewModel>>(salaResult.Value)
             });
         }
+
+        //[HttpGet("salas-disponiveis/{data:datetime}")]
+        //public ActionResult<List<ListarSalaViewModel>> SelecionarSalasDisponiveis(DateTime data)
+        //{
+        //    var salaResult = servicoSala.SelecionarSalasDisponiveis(data);
+
+        //    if (salaResult.IsFailed)
+        //        return InternalError(salaResult);
+
+        //    return Ok(new
+        //    {
+        //        sucesso = true,
+        //        dados = mapeadorSalas.Map<List<ListarSalaViewModel>>(salaResult.Value)
+        //    });
+        //}
+
 
         [HttpGet("visualizacao-completa/{id:guid}")]
         public ActionResult<VisualizarSalaViewModel> SelecionarSalaCompletaPorId(Guid id)

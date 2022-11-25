@@ -16,12 +16,12 @@ namespace Teste_ControleDeCinema.Dominio.ModuloFilme
                 
         }
 
-        public Filme(string titulo, TimeSpan duracao, string descricao, byte[] imagem)
+        public Filme(string titulo, TimeSpan duracao, string descricao, string urlImagem)
         {
             Titulo = titulo;
             Duracao = duracao;
             Descricao = descricao;
-            Imagem = imagem;
+            UrlImagem = urlImagem;
         }
 
         public override void Atualizar(Filme registro)
@@ -30,15 +30,8 @@ namespace Teste_ControleDeCinema.Dominio.ModuloFilme
             Titulo = registro.Titulo;
             Duracao = registro.Duracao;
             Descricao = registro.Descricao;
-            Imagem = registro.Imagem;
+            UrlImagem = registro.UrlImagem;
         }
-
-        public string  Titulo { get; set; }
-        public TimeSpan Duracao { get; set; }
-        public string Descricao { get; set; }
-        public byte[] Imagem { get; set; }
-
-        public List<Sessao> Sessoes { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -47,28 +40,24 @@ namespace Teste_ControleDeCinema.Dominio.ModuloFilme
                    UsuarioId.Equals(filme.UsuarioId) &&
                    EqualityComparer<Usuario>.Default.Equals(Usuario, filme.Usuario) &&
                    Titulo == filme.Titulo &&
-                   Duracao == filme.Duracao &&
+                   Duracao.Equals(filme.Duracao) &&
                    Descricao == filme.Descricao &&
-                   EqualityComparer<byte[]>.Default.Equals(Imagem, filme.Imagem);
+                   UrlImagem == filme.UrlImagem &&
+                   EqualityComparer<List<Sessao>>.Default.Equals(Sessoes, filme.Sessoes);
         }
 
         public override int GetHashCode()
         {
-            HashCode hash = new HashCode();
-            hash.Add(Id);
-            hash.Add(UsuarioId);
-            hash.Add(Titulo);
-            hash.Add(Duracao);
-            hash.Add(Descricao);
-            hash.Add(Imagem);
-
-            return hash.ToHashCode();   
+            return HashCode.Combine(Id, UsuarioId, Usuario, Titulo, Duracao, Descricao, UrlImagem, Sessoes);
         }
 
+        public string  Titulo { get; set; }
+        public TimeSpan Duracao { get; set; }
+        public string Descricao { get; set; }
+        public string UrlImagem { get; set; }
         
-        //public override string ToString()
-        //{
-        //    return this.Titulo;
-        //}
+
+        public List<Sessao> Sessoes { get; set; }
+
     }
 }

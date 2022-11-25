@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System;
 using Teste_ControleDeCinema.Dominio.ModuloFilme;
 using Teste_ControleDeCinema.Webapi.ViewModels.ModuloFilme;
 

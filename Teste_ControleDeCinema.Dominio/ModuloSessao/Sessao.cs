@@ -21,12 +21,13 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSessao
         {
             Data = data;
             HoraInicio = horaInicio;
-            HoraTermino = horaTermino;
             TipoSessao = tipoSessao;
             TipoAudio = tipoAudio;
             ValorIngresso = valorIngresso;
             Filme = filme;
             Sala = sala;
+            HoraTermino = horaTermino;
+           // HoraTermino = horaInicio + filme.Duracao; //
         }
 
 
@@ -108,5 +109,9 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSessao
             return hash.ToHashCode();
         }
 
+        public bool NaoPodeExcluir()
+        {
+            return (Data - DateTime.Now).TotalDays < 10;
+        }
     }
 }

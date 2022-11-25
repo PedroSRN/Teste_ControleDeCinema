@@ -121,13 +121,13 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloSala
             }
         }
 
-        public Result<List<Sala>> SelecionarTodos(Guid usuarioId = new Guid())
+        public Result<List<Sala>> SelecionarTodos()
         {
             Log.Logger.Debug("Tentando selecionar salas...");
 
             try
             {
-                var salas = repositorioSala.SelecionarTodos(usuarioId);
+                var salas = repositorioSala.SelecionarTodos();
 
                 Log.Logger.Information("Salas selecionados com sucesso");
 
@@ -170,6 +170,30 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloSala
 
                 return Result.Fail(msgErro);
             }
+
         }
+
+
+        //public Result<List<Sala>> SelecionarSalasDisponiveis(DateTime data)
+        //{
+        //    Log.Logger.Debug("Tentando selecionar salas disponiveis...");
+
+        //    try
+        //    {
+        //        var salas = repositorioSala.SelecionarSalasDisponiveis(data);
+
+        //        Log.Logger.Information("Salas selecionados com sucesso");
+
+        //        return Result.Ok(salas);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string msgErro = "Falha no sistema ao tentar selecionar todas as Salas";
+
+        //        Log.Logger.Error(ex, msgErro);
+
+        //        return Result.Fail(msgErro);
+        //    }
+        //}
     }
 }

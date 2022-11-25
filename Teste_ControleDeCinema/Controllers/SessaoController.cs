@@ -27,7 +27,7 @@ namespace Teste_ControleDeCinema.Webapi.Controllers
         [HttpGet]
         public ActionResult<List<ListarSessaoViewModel>> SelecionarTodos()
         {
-            var sessaoResult = servicoSessao.SelecionarTodos(UsuarioLogado.Id);
+            var sessaoResult = servicoSessao.SelecionarTodos();
 
             if (sessaoResult.IsFailed)
                 return InternalError(sessaoResult);

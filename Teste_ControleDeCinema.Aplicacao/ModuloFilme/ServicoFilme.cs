@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using FluentValidation.Results;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -105,7 +106,7 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloFilme
 
                 contextoPersistencia.GravarDados();
 
-                Log.Logger.Information("Filme {FilmeId} editado com sucesso", filme.Id);
+                Log.Logger.Information("Filme {FilmeId} excluido com sucesso", filme.Id);
 
                 return Result.Ok();
             }
@@ -115,19 +116,24 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloFilme
 
                 string msgErro = "Falha no sistema ao tentar excluir o Filme";
 
+                if ((bool)(ex.InnerException?.Message?.StartsWith("Cannot insert the value NULL into column 'FilmeId'")))
+                {
+                    msgErro = "Não foi possivel remover este filme, pois ele está vinculado a uma sessão";
+                }
+               
                 Log.Logger.Error(ex, msgErro + " {FilmeId}", filme.Id);
 
                 return Result.Fail(msgErro);
             }
         }
 
-        public Result<List<Filme>> SelecionarTodos(Guid usuarioId = new Guid())
+        public Result<List<Filme>> SelecionarTodos()
         {
             Log.Logger.Debug("Tentando selecionar filmes...");
 
             try
             {
-                var filmes = repositorioFilme.SelecionarTodos(usuarioId);
+                var filmes = repositorioFilme.SelecionarTodos();
 
                 Log.Logger.Information("Filmes selecionados com sucesso");
 
@@ -170,6 +176,35 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloFilme
 
                 return Result.Fail(msgErro);
             }
+        }
+
+        protected override Result Validar(Filme arg)
+        {
+            var validador = new ValidadorFilme();
+
+            var resultadoValidacao = validador.Validate(arg);
+
+            List<Error> erros = new List<Error>();
+
+            foreach (ValidationFailure item in resultadoValidacao.Errors)
+                erros.Add(new Error(item.ErrorMessage));
+
+            if (NomeFilmeDuplicado(arg))
+                erros.Add(new Error("Título do filme duplicado"));
+
+            if (erros.Any())
+                return Result.Fail(erros);
+
+            return Result.Ok();
+        }
+
+        private bool NomeFilmeDuplicado(Filme arg)
+        {
+            var filmeEncontrado = repositorioFilme.SelecionarFilmePorNome(arg.Titulo);
+
+            return filmeEncontrado != null &&
+                   filmeEncontrado.Titulo == arg.Titulo &&
+                   filmeEncontrado.Id != arg.Id;
         }
 
     }

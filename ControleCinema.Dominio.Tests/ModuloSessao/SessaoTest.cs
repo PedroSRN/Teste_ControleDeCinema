@@ -57,31 +57,7 @@ namespace ControleCinema.Dominio.Tests.ModuloSessao
             outroResultado.ShouldHaveValidationErrorFor(sessao => sessao.HoraInicio);
         }
 
-        [TestMethod]
-        public void O_Tipo_De_Sessao_Deve_Ser_Preenchida()
-        {
-            //arrenge
-            sessao.TipoSessao = default;
-
-            //action
-            var outroResultado = validador.TestValidate(sessao);
-
-            //assert
-            outroResultado.ShouldHaveValidationErrorFor(sessao => sessao.TipoSessao);
-        }
-
-        [TestMethod]
-        public void O_Tipo_De_Audio_Da_Sessao_Deve_Ser_Preenchido()
-        {
-            //arrenge
-            sessao.TipoAudio = default;
-
-            //action
-            var outroResultado = validador.TestValidate(sessao);
-
-            //assert
-            outroResultado.ShouldHaveValidationErrorFor(sessao => sessao.TipoAudio);
-        }
+       
 
         [TestMethod]
         public void O_Valor_Do_Ingresso_Da_Sessao_Deve_Ser_Preenchido()

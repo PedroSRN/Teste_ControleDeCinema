@@ -24,6 +24,10 @@ namespace Teste_ControleDeCinema.Orm.ModuloSala
               .HasForeignKey(x => x.UsuarioId)
               .OnDelete(DeleteBehavior.NoAction);
 
+            builder.HasData(new Sala("Sala - 1", 50));
+            builder.HasData(new Sala("Sala - 2", 50));
+
+
         }
     }
 }

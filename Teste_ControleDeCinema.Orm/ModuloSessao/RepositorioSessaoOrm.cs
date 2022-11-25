@@ -23,13 +23,15 @@ namespace Teste_ControleDeCinema.Orm.ModuloSessao
 
         }
 
-        public override List<Sessao> SelecionarTodos(Guid usuarioId = new Guid())
+       
+
+        public override List<Sessao> SelecionarTodos()
         {
             return registros
                 .Include(x => x.Filme)
                 .Include(x => x.Sala)
-                .Where(x => x.UsuarioId.Equals(usuarioId))
                 .ToList();
         }
+
     }
 }

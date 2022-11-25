@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Teste_ControleDeCinema.Orm.Compartilhado;
 
 namespace Teste_ControleDeCinema.Orm.Migrations
 {
     [DbContext(typeof(ControleCinemaDbContext))]
-    partial class ControleCinemaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221123171435_Configuração_Sala")]
+    partial class Configuração_Sala
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -229,13 +231,13 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                     b.Property<long>("Duracao")
                         .HasColumnType("bigint");
 
+                    b.Property<byte[]>("Imagem")
+                        .IsRequired()
+                        .HasColumnType("varbinary(MAX)");
+
                     b.Property<string>("Titulo")
                         .IsRequired()
                         .HasColumnType("varchar(200)");
-
-                    b.Property<string>("UrlImagem")
-                        .IsRequired()
-                        .HasColumnType("varchar(MAX)");
 
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
@@ -271,14 +273,14 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("44a12f42-1905-4e10-4a55-08dacf110c11"),
+                            Id = new Guid("f75467ca-29b9-4077-a73a-08dacd763184"),
                             Capacidade = 50,
                             Nome = "Sala - 1",
                             UsuarioId = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
-                            Id = new Guid("dfd10bcf-142c-486a-4a56-08dacf110c11"),
+                            Id = new Guid("9f67d2ab-21d0-4a21-a73b-08dacd763184"),
                             Capacidade = 50,
                             Nome = "Sala - 2",
                             UsuarioId = new Guid("00000000-0000-0000-0000-000000000000")

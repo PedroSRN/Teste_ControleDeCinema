@@ -14,7 +14,7 @@ namespace Teste_ControleDeCinema.Webapi.ViewModels.ModuloSessao
         [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
         public TimeSpan HoraInicio { get; set; }
 
-        [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
+       // [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
         public TimeSpan HoraTermino { get; set; }
 
         [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
@@ -24,7 +24,7 @@ namespace Teste_ControleDeCinema.Webapi.ViewModels.ModuloSessao
         public TipoAudioEnum TipoAudio { get; set; }
 
         [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
-        public string ValorIngresso { get; set; }
+        public decimal ValorIngresso { get; set; }
 
         [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
         public Guid FilmeId { get; set; }

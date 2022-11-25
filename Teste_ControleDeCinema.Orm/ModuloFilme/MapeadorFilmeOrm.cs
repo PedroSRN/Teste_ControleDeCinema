@@ -19,7 +19,8 @@ namespace Teste_ControleDeCinema.Orm.ModuloFilme
             builder.Property(x => x.Titulo).HasColumnType("varchar(200)").IsRequired();
             builder.Property(x => x.Duracao).HasColumnType("bigint").IsRequired();
             builder.Property(x => x.Descricao).HasColumnType("varchar(500)").IsRequired();
-            builder.Property(x => x.Imagem).IsRequired().HasColumnType("varbinary(MAX)");
+            builder.Property(x => x.UrlImagem).HasColumnType("varchar(MAX)").IsRequired();
+           
 
             builder.HasOne(x => x.Usuario)
                .WithMany()

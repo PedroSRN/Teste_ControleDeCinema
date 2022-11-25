@@ -17,6 +17,7 @@ namespace Teste_ControleDeCinema.Webapi.ViewModels.ModuloFilme
         public string Descricao { get; set; }
 
         [Required(ErrorMessage = "O campo '{0}' é obrigatório")]
-        public byte[] Imagem { get; set; }
+        public string UrlImagem { get; set; }
+
     }
 }

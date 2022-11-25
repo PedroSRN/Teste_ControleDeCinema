@@ -9,5 +9,6 @@ namespace Teste_ControleDeCinema.Dominio.ModuloFilme
 {
     public interface IRepositorioFilme : IRepositorio<Filme>
     {
+        Filme SelecionarFilmePorNome(string titulo);
     }
 }
