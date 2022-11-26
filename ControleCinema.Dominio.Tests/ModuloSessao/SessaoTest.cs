@@ -44,6 +44,20 @@ namespace ControleCinema.Dominio.Tests.ModuloSessao
             outroResultado.ShouldHaveValidationErrorFor(sessao => sessao.Data);
         }
 
+
+        [TestMethod]
+        public void A_Data_Da_Sessao_Deve_Ser_Igual_Ou_Superior_A_Data_De_Hoje()
+        {
+            //arrenge
+            sessao.Data = new(2022, 03, 06);
+
+            //action
+            var outroResultado = validador.TestValidate(sessao);
+
+            //assert
+            outroResultado.ShouldHaveValidationErrorFor(sessao => sessao.Data);
+        }
+
         [TestMethod]
         public void A_Hora_De_Inicio_Da_Sessao_Deve_Ser_Preenchida()
         {
