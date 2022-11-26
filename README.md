@@ -1,5 +1,6 @@
 # Teste_ControleDeCinema - Back-End
-Api 3.0
+
+Este projeto foi gerado com C#
 
 # Para o Back-End: 
 - Abra o terminal e insira o comando “cd .\Teste_ControleDeCinema\” para selecionar o projeto da API;
