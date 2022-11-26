@@ -39,20 +39,6 @@ namespace Teste_ControleDeCinema.Webapi.Controllers
             });
         }
 
-        //[HttpGet("salas-disponiveis/{data:datetime}")]
-        //public ActionResult<List<ListarSalaViewModel>> SelecionarSalasDisponiveis(DateTime data)
-        //{
-        //    var salaResult = servicoSala.SelecionarSalasDisponiveis(data);
-
-        //    if (salaResult.IsFailed)
-        //        return InternalError(salaResult);
-
-        //    return Ok(new
-        //    {
-        //        sucesso = true,
-        //        dados = mapeadorSalas.Map<List<ListarSalaViewModel>>(salaResult.Value)
-        //    });
-        //}
 
 
         [HttpGet("visualizacao-completa/{id:guid}")]

@@ -26,14 +26,14 @@ namespace Teste_ControleDeCinema.Orm.ModuloSala
                 .SingleOrDefault(x => x.Id == id);
         }
 
-        public List<Sala> SelecionarSalasDisponiveis(Sessao sessao)
-        {
-            return registros
-                 .Include(x => x.Sessoes)
-                 .Where(x => x.Sessoes.Any(x => x.Data == sessao.Data))
-                 .Where(x => x.Sessoes.Any(x => x.HoraInicio < sessao.HoraInicio && x.HoraTermino > sessao.HoraTermino))
-                 .ToList();
+        //public List<Sala> SelecionarSalasDisponiveis(Sessao sessao)
+        //{
+        //    return registros
+        //         .Include(x => x.Sessoes)
+        //         .Where(x => x.Sessoes.Any(x => x.Data == sessao.Data))
+        //         .Where(x => x.Sessoes.Any(x => x.HoraInicio < sessao.HoraInicio && x.HoraTermino > sessao.HoraTermino))
+        //         .ToList();
 
-        }
+        //}
     }
 }

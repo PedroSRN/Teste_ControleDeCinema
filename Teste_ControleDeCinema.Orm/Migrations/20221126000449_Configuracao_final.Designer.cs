@@ -10,8 +10,8 @@ using Teste_ControleDeCinema.Orm.Compartilhado;
 namespace Teste_ControleDeCinema.Orm.Migrations
 {
     [DbContext(typeof(ControleCinemaDbContext))]
-    [Migration("20221125181535_Configuração_imagem2")]
-    partial class Configuração_imagem2
+    [Migration("20221126000449_Configuracao_final")]
+    partial class Configuracao_final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -236,8 +236,7 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                         .HasColumnType("varchar(200)");
 
                     b.Property<string>("UrlImagem")
-                        .IsRequired()
-                        .HasColumnType("varchar(MAX)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UsuarioId")
                         .HasColumnType("uniqueidentifier");
@@ -273,14 +272,14 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("44a12f42-1905-4e10-4a55-08dacf110c11"),
+                            Id = new Guid("cd0e93cb-bdaf-464a-4e92-08dacf41d5d3"),
                             Capacidade = 50,
                             Nome = "Sala - 1",
                             UsuarioId = new Guid("00000000-0000-0000-0000-000000000000")
                         },
                         new
                         {
-                            Id = new Guid("dfd10bcf-142c-486a-4a56-08dacf110c11"),
+                            Id = new Guid("a91afe0e-39a5-4014-4e93-08dacf41d5d3"),
                             Capacidade = 50,
                             Nome = "Sala - 2",
                             UsuarioId = new Guid("00000000-0000-0000-0000-000000000000")

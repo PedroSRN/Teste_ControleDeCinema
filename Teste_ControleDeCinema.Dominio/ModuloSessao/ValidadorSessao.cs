@@ -12,6 +12,7 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSessao
         public ValidadorSessao()
         {
             RuleFor(x => x.Data)
+                .GreaterThanOrEqualTo((x) => DateTime.Now.Date)
                 .NotEmpty();
 
             RuleFor(x => x.HoraInicio)

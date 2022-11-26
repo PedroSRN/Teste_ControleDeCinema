@@ -188,33 +188,6 @@ namespace Teste_ControleDeCinema.Aplicacao.ModuloSessao
             }
         }
 
-        protected override Result Validar(Sessao arg)
-        {
-            var validador = new ValidadorSessao();
-
-            var resultadoValidacao = validador.Validate(arg);
-
-            List<Error> erros = new List<Error>();
-
-            foreach (ValidationFailure item in resultadoValidacao.Errors)
-                erros.Add(new Error(item.ErrorMessage));
-
-            if (SalaIndisponivel(arg))
-                erros.Add(new Error("Sala indisponivel"));
-
-            if (erros.Any())
-                return Result.Fail(erros);
-
-            return Result.Ok();
-        }
-
-        private bool SalaIndisponivel(Sessao arg)
-        {
-            var salasEncontradas = repositorioSala.SelecionarSalasDisponiveis(arg);
-
-            
-            return  salasEncontradas == null || salasEncontradas.Count < 1;
-        }
-
+       
     }
 }

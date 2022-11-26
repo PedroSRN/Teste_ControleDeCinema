@@ -87,21 +87,6 @@ namespace ControleCinema.Dominio.Tests.ModuloFilme
 
             //assert
             outroResultado.ShouldHaveValidationErrorFor(filme => filme.Duracao);
-        }
-
-        [TestMethod]
-        public void O_Titulo_da_Imagem_Do_Filme_Não_Pode_Ser_Nulo()
-        {
-            //arrenge
-            filme.UrlImagem = null;
-
-            //action
-            var outroResultado = validador.TestValidate(filme);
-
-            //assert
-            outroResultado.ShouldHaveValidationErrorFor(filme => filme.UrlImagem);
-        }
-
-       
+        }      
     }
 }

@@ -18,13 +18,7 @@ namespace Teste_ControleDeCinema.Dominio.ModuloFilme
                 .NotNull().NotEmpty();
 
             RuleFor(x => x.Duracao)
-                .NotEmpty();
-
-            RuleFor(x => x.UrlImagem)
-                .NotNull();
-
-
-          
+                .NotEmpty();    
         }
     }
 }

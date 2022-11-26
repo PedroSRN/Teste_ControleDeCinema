@@ -10,6 +10,5 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSala
 {
     public interface IRepositorioSala : IRepositorio<Sala>
     {
-        List<Sala> SelecionarSalasDisponiveis(Sessao sessao);
     }
 }
