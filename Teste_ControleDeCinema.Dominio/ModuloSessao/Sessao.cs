@@ -80,24 +80,26 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSessao
         {
             return obj is Sessao sessao &&
                    Id.Equals(sessao.Id) &&
-                   UsuarioId.Equals(sessao.UsuarioId) &&
-                   EqualityComparer<Usuario>.Default.Equals(Usuario, sessao.Usuario) &&
+                   EqualityComparer<Filme>.Default.Equals(_filme, sessao._filme) &&
+                   EqualityComparer<Sala>.Default.Equals(_sala, sessao._sala) &&
                    Data == sessao.Data &&
-                   HoraInicio == sessao.HoraInicio &&
-                   HoraTermino == sessao.HoraTermino &&
+                   HoraInicio.Equals(sessao.HoraInicio) &&
+                   HoraTermino.Equals(sessao.HoraTermino) &&
                    TipoSessao == sessao.TipoSessao &&
                    TipoAudio == sessao.TipoAudio &&
                    ValorIngresso == sessao.ValorIngresso &&
                    EqualityComparer<Filme>.Default.Equals(Filme, sessao.Filme) &&
-                   EqualityComparer<Sala>.Default.Equals(Sala, sessao.Sala);
+                   EqualityComparer<Guid?>.Default.Equals(FilmeId, sessao.FilmeId) &&
+                   EqualityComparer<Sala>.Default.Equals(Sala, sessao.Sala) &&
+                   EqualityComparer<Guid?>.Default.Equals(SalaId, sessao.SalaId);
         }
 
         public override int GetHashCode()
         {
             HashCode hash = new HashCode();
             hash.Add(Id);
-            hash.Add(UsuarioId);
-            hash.Add(Usuario);
+            hash.Add(_filme);
+            hash.Add(_sala);
             hash.Add(Data);
             hash.Add(HoraInicio);
             hash.Add(HoraTermino);
@@ -105,7 +107,9 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSessao
             hash.Add(TipoAudio);
             hash.Add(ValorIngresso);
             hash.Add(Filme);
+            hash.Add(FilmeId);
             hash.Add(Sala);
+            hash.Add(SalaId);
             return hash.ToHashCode();
         }
 

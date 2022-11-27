@@ -10,7 +10,6 @@ namespace Teste_ControleDeCinema.Webapi.Config.AutoMapperConfig
         public FilmeProfile()
         {
             CreateMap<FormsFilmeViewModel, Filme>()
-               .ForMember(destino => destino.UsuarioId, opt => opt.MapFrom<UsuarioResolver>())
                .ForMember(destino => destino.Id, opt => opt.Ignore());
 
             CreateMap<Filme, ListarFilmeViewModel>()

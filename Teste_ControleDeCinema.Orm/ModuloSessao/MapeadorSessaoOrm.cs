@@ -22,11 +22,7 @@ namespace Teste_ControleDeCinema.Orm.ModuloSessao
             builder.Property(x => x.TipoAudio).HasConversion<int>().IsRequired();
             builder.Property(x => x.ValorIngresso).IsRequired();
 
-            builder.HasOne(x => x.Usuario)
-              .WithMany()
-              .IsRequired(false)
-              .HasForeignKey(x => x.UsuarioId)
-              .OnDelete(DeleteBehavior.NoAction);
+          
 
             builder.HasOne(x => x.Filme)
                 .WithMany(x => x.Sessoes)

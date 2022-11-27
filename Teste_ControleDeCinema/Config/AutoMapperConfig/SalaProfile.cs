@@ -9,7 +9,6 @@ namespace Teste_ControleDeCinema.Webapi.Config.AutoMapperConfig
         public SalaProfile()
         {
             CreateMap<FormsSalaViewModel, Sala>()
-               .ForMember(destino => destino.UsuarioId, opt => opt.MapFrom<UsuarioResolver>())
                .ForMember(destino => destino.Id, opt => opt.Ignore());
 
 

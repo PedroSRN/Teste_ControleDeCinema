@@ -37,21 +37,14 @@ namespace Teste_ControleDeCinema.Dominio.ModuloSala
         {
             return obj is Sala sala &&
                    Id.Equals(sala.Id) &&
-                   UsuarioId.Equals(sala.UsuarioId) &&
-                   EqualityComparer<Usuario>.Default.Equals(Usuario, sala.Usuario) &&
                    Nome == sala.Nome &&
-                   Capacidade == sala.Capacidade;
+                   Capacidade == sala.Capacidade &&
+                   EqualityComparer<List<Sessao>>.Default.Equals(Sessoes, sala.Sessoes);
         }
 
         public override int GetHashCode()
         {
-            HashCode hash = new HashCode();
-            hash.Add(Id);
-            hash.Add(UsuarioId);
-            hash.Add(Usuario);
-            hash.Add(Nome);
-            hash.Add(Capacidade);
-            return hash.ToHashCode();
+            return HashCode.Combine(Id, Nome, Capacidade, Sessoes);
         }
     }
 }

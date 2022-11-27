@@ -18,7 +18,6 @@ namespace ControleCinema.Dominio.Tests.ModuloFilme
                 Titulo = "Rumo ao Hexa",
                 Duracao = new TimeSpan(0, 01, 40, 00),
                 Descricao = "Fala da busca do brasil para a conquista do tão sonhado hexa",
-                UrlImagem = "teste",
               
             };
             validador = new ValidadorFilme();

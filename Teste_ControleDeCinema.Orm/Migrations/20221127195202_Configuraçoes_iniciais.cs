@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Teste_ControleDeCinema.Orm.Migrations
 {
-    public partial class configuracoes_iniciais : Migration
+    public partial class Configuraçoes_iniciais : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,33 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TBFilme",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Titulo = table.Column<string>(type: "varchar(200)", nullable: false),
+                    Duracao = table.Column<long>(type: "bigint", nullable: false),
+                    Descricao = table.Column<string>(type: "varchar(500)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBFilme", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TBSala",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(200)", nullable: false),
+                    Capacidade = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TBSala", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,46 +181,6 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TBFilme",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Titulo = table.Column<string>(type: "varchar(200)", nullable: false),
-                    Duracao = table.Column<long>(type: "bigint", nullable: false),
-                    Descricao = table.Column<string>(type: "varchar(500)", nullable: false),
-                    Imagem = table.Column<byte[]>(type: "varbinary(MAX)", nullable: false),
-                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TBFilme", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TBFilme_AspNetUsers_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TBSala",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(200)", nullable: false),
-                    Capacidade = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TBSala", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TBSala_AspNetUsers_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TBSessao",
                 columns: table => new
                 {
@@ -205,17 +192,11 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                     TipoAudio = table.Column<int>(type: "int", nullable: false),
                     ValorIngresso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     FilmeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SalaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    SalaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TBSessao", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TBSessao_AspNetUsers_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TBSessao_TBFilme_FilmeId",
                         column: x => x.FilmeId,
@@ -227,6 +208,16 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                         principalTable: "TBSala",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.InsertData(
+                table: "TBSala",
+                columns: new[] { "Id", "Capacidade", "Nome" },
+                values: new object[] { new Guid("2decb5f4-d820-49ee-1085-08dad0b0da79"), 50, "Sala - 1" });
+
+            migrationBuilder.InsertData(
+                table: "TBSala",
+                columns: new[] { "Id", "Capacidade", "Nome" },
+                values: new object[] { new Guid("bd2a2095-4696-4162-1086-08dad0b0da79"), 50, "Sala - 2" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -268,16 +259,6 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TBFilme_UsuarioId",
-                table: "TBFilme",
-                column: "UsuarioId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TBSala_UsuarioId",
-                table: "TBSala",
-                column: "UsuarioId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TBSessao_FilmeId",
                 table: "TBSessao",
                 column: "FilmeId");
@@ -286,11 +267,6 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                 name: "IX_TBSessao_SalaId",
                 table: "TBSessao",
                 column: "SalaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TBSessao_UsuarioId",
-                table: "TBSessao",
-                column: "UsuarioId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -317,13 +293,13 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "TBFilme");
 
             migrationBuilder.DropTable(
                 name: "TBSala");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

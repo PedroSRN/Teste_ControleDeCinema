@@ -18,11 +18,9 @@ namespace Teste_ControleDeCinema.Orm.ModuloSala
             builder.Property(x => x.Nome).HasColumnType("varchar(200)").IsRequired();
             builder.Property(x => x.Capacidade).IsRequired();
 
-            builder.HasOne(x => x.Usuario)
-              .WithMany()
-              .IsRequired(false)
-              .HasForeignKey(x => x.UsuarioId)
-              .OnDelete(DeleteBehavior.NoAction);
+            
+
+            
 
             builder.HasData(new Sala("Sala - 1", 50));
             builder.HasData(new Sala("Sala - 2", 50));

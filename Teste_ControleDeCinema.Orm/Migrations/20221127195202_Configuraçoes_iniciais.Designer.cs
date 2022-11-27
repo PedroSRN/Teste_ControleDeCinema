@@ -10,8 +10,8 @@ using Teste_ControleDeCinema.Orm.Compartilhado;
 namespace Teste_ControleDeCinema.Orm.Migrations
 {
     [DbContext(typeof(ControleCinemaDbContext))]
-    [Migration("20221126000449_Configuracao_final")]
-    partial class Configuracao_final
+    [Migration("20221127195202_Configuraçoes_iniciais")]
+    partial class Configuraçoes_iniciais
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -235,15 +235,7 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(200)");
 
-                    b.Property<string>("UrlImagem")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("TBFilme");
                 });
@@ -260,29 +252,22 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(200)");
 
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("TBSala");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cd0e93cb-bdaf-464a-4e92-08dacf41d5d3"),
+                            Id = new Guid("2decb5f4-d820-49ee-1085-08dad0b0da79"),
                             Capacidade = 50,
-                            Nome = "Sala - 1",
-                            UsuarioId = new Guid("00000000-0000-0000-0000-000000000000")
+                            Nome = "Sala - 1"
                         },
                         new
                         {
-                            Id = new Guid("a91afe0e-39a5-4014-4e93-08dacf41d5d3"),
+                            Id = new Guid("bd2a2095-4696-4162-1086-08dad0b0da79"),
                             Capacidade = 50,
-                            Nome = "Sala - 2",
-                            UsuarioId = new Guid("00000000-0000-0000-0000-000000000000")
+                            Nome = "Sala - 2"
                         });
                 });
 
@@ -314,9 +299,6 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                     b.Property<int>("TipoSessao")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("ValorIngresso")
                         .HasColumnType("decimal(18,2)");
 
@@ -325,8 +307,6 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                     b.HasIndex("FilmeId");
 
                     b.HasIndex("SalaId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("TBSessao");
                 });
@@ -382,26 +362,6 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Teste_ControleDeCinema.Dominio.ModuloFilme.Filme", b =>
-                {
-                    b.HasOne("Teste_ControleDeCinema.Dominio.ModuloAutenticacao.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("Teste_ControleDeCinema.Dominio.ModuloSala.Sala", b =>
-                {
-                    b.HasOne("Teste_ControleDeCinema.Dominio.ModuloAutenticacao.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("Usuario");
-                });
-
             modelBuilder.Entity("Teste_ControleDeCinema.Dominio.ModuloSessao.Sessao", b =>
                 {
                     b.HasOne("Teste_ControleDeCinema.Dominio.ModuloFilme.Filme", "Filme")
@@ -416,16 +376,9 @@ namespace Teste_ControleDeCinema.Orm.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Teste_ControleDeCinema.Dominio.ModuloAutenticacao.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.Navigation("Filme");
 
                     b.Navigation("Sala");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Teste_ControleDeCinema.Dominio.ModuloFilme.Filme", b =>

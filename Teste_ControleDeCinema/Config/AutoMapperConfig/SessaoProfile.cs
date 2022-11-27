@@ -10,7 +10,6 @@ namespace Teste_ControleDeCinema.Webapi.Config.AutoMapperConfig
         public SessaoProfile()
         {
             CreateMap<FormsSessaoViewModel, Sessao>()
-                .ForMember(destino => destino.UsuarioId, opt => opt.MapFrom<UsuarioResolver>())
                 .ForMember(destino => destino.Id, opt => opt.Ignore())
                 .AfterMap<ConfigurarFilmeMappingAction>();
 
